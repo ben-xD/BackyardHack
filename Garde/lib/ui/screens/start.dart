@@ -1,3 +1,6 @@
+import 'package:Garde/ui/screens/diary.dart';
+import 'package:Garde/ui/screens/garden.dart';
+import 'package:Garde/ui/screens/learn.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -7,19 +10,22 @@ class StartScreen extends StatefulWidget {
 }
 
 class BottomTabDestination {
-  const BottomTabDestination(this.title, this.widget, this.icon, this.color);
-
+  const BottomTabDestination(this.title, this.icon, this.color);
   final String title;
-  final FaIcon icon;
+  final IconData icon;
   final MaterialColor color;
-  // FaIcon(FontAwesomeIcons.gamepad)
-  // final Widget widget;
 }
+
+const List<BottomTabDestination> allBottomTabDestinations = [
+  BottomTabDestination("Learn", FontAwesomeIcons.brain, Colors.orange),
+  BottomTabDestination("Garden", FontAwesomeIcons.carrot, Colors.green),
+  BottomTabDestination("Diary", FontAwesomeIcons.bookOpen, Colors.blue),
+];
 
 List<BottomTabDestination> destinations;
 
 class _StartScreenState extends State<StartScreen> {
-  int _currentIndex = 0;
+  int _currentIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -28,23 +34,40 @@ class _StartScreenState extends State<StartScreen> {
         top: false,
         child: IndexedStack(
           index: _currentIndex,
-          children: allDestinations.map<Widget>((Destination destination) {
-            return DestinationView(destination);
-          }).toList(),
+          children: [
+            LearnScreen(),
+            GardenScreen(),
+            DiaryScreen(),
+          ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        showUnselectedLabels: false,
         currentIndex: _currentIndex,
         onTap: (int index) {
           setState(() {
             _currentIndex = index;
           });
         },
-        items: allDestinations.map((Destination destination) {
+        items: allBottomTabDestinations.asMap().entries.map((entry) {
+          int index = entry.key;
+          BottomTabDestination destination = entry.value;
           return BottomNavigationBarItem(
-              icon: Icon(destination.icon),
-              backgroundColor: destination.color,
-              title: Text(destination.title));
+            activeIcon: Icon(
+              destination.icon,
+              color: destination.color,
+            ),
+            icon: Icon(
+              destination.icon,
+            ),
+            backgroundColor: destination.color,
+            title: Text(
+              destination.title,
+              style: (_currentIndex == index)
+                  ? TextStyle(color: destination.color)
+                  : TextStyle(color: Colors.black54),
+            ),
+          );
         }).toList(),
       ),
     );
