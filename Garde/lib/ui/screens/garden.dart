@@ -1,3 +1,4 @@
+import 'package:Garde/ui/widgets/calendar.dart';
 import 'package:Garde/ui/widgets/hamburger.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +34,7 @@ class _GardenScreenState extends State<GardenScreen> {
       ),
       body: Column(
         children: <Widget>[
-          Text("Weather"),
+          Calendar(),
           Text("Garden Screen"),
         ],
       ),
