@@ -42,6 +42,7 @@ class _StartScreenState extends State<StartScreen> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        showUnselectedLabels: false,
         currentIndex: _currentIndex,
         onTap: (int index) {
           setState(() {
