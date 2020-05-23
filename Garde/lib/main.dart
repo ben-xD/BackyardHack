@@ -1,7 +1,11 @@
+import 'package:Garde/services/location.dart';
 import 'package:Garde/ui/screens/start.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  await DotEnv().load('.env');
   runApp(MyApp());
 }
 
@@ -16,7 +20,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: StartScreen(),
+      home: Provider(
+          create: (context) => LocationService(), child: StartScreen()),
     );
   }
 }

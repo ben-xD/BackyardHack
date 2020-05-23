@@ -1,4 +1,3 @@
-import 'package:Garde/ui/screens/diary.dart';
 import 'package:Garde/ui/screens/garden.dart';
 import 'package:Garde/ui/screens/learn.dart';
 import 'package:flutter/material.dart';
@@ -19,13 +18,13 @@ class BottomTabDestination {
 const List<BottomTabDestination> allBottomTabDestinations = [
   BottomTabDestination("Learn", FontAwesomeIcons.brain, Colors.orange),
   BottomTabDestination("Garden", FontAwesomeIcons.carrot, Colors.green),
-  BottomTabDestination("Diary", FontAwesomeIcons.bookOpen, Colors.blue),
+  // BottomTabDestination("Diary", FontAwesomeIcons.bookOpen, Colors.blue),
 ];
 
 List<BottomTabDestination> destinations;
 
 class _StartScreenState extends State<StartScreen> {
-  int _currentIndex = 1;
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class _StartScreenState extends State<StartScreen> {
           children: [
             LearnScreen(),
             GardenScreen(),
-            DiaryScreen(),
+            // DiaryScreen(),
           ],
         ),
       ),
